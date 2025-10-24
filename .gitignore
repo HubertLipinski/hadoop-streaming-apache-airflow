@@ -1,0 +1,86 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Test files
+test_*.txt
+*_test.txt
+test*.csv
+*test*.csv
+full_test_result.txt
+test_without_combiner.txt
+test_mapper_output.txt
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# Output files
+output*/
+part-*
+_SUCCESS
+*.out
+
+# Large data files
+*.zip
+*.tar.gz
+*.gz
+zestaw*.zip
+
+# PDFs (keep only essential docs)
+*.pdf
+
+# Hadoop/MapReduce temporary files
+_logs/
+.staging/
+
+# Environment
+.env
+.venv
+env/
+venv/
+
+# Backup files
+*.bak
+*.backup
