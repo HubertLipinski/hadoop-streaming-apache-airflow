@@ -84,3 +84,12 @@ venv/
 # Backup files
 *.bak
 *.backup
+
+# Docker
+docker-compose.override.yml
+
+# Project output files
+output6.json
+src/test_mr_output.csv
+src/output*.json
+weryfikacja_kryteriow.md

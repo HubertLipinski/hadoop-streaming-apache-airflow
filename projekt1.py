@@ -68,7 +68,17 @@ with DAG(
         task_id="hadoop_streaming",
         bash_command=(
             "mapred streaming "
-            "-files {{ params.dags_home }}/project_files/ . . ."
+            "-files {{ params.dags_home }}/project_files/mapper.py,"
+            "{{ params.dags_home }}/project_files/reducer.py,"
+            "{{ params.dags_home }}/project_files/combiner.py "
+            "-mapper mapper.py "
+            "-reducer reducer.py "
+            "-combiner combiner.py "
+            "-input {{ params.input_dir }}/datasource1 "
+            "-output {{ params.output_mr_dir }} "
+            "-jobconf mapreduce.job.reduces=4 "
+            "-jobconf mapreduce.map.output.compress=true "
+            "-jobconf mapreduce.map.output.compress.codec=org.apache.hadoop.io.compress.SnappyCodec"
         ),
     )
 
@@ -77,7 +87,10 @@ with DAG(
         task_id="hive",
         bash_command=(
             "beeline -u jdbc:hive2://localhost:10000/default "
-            ". . ."
+            "--hiveconf output_dir3={{ params.output_mr_dir }} "
+            "--hiveconf input_dir4={{ params.input_dir }}/datasource4 "
+            "--hiveconf output_dir6={{ params.output_dir }} "
+            "-f {{ params.dags_home }}/project_files/hive.hql"
         ),
         trigger_rule="none_failed",
     )
