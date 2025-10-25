@@ -1,12 +1,14 @@
 -- Hive script for processing MapReduce output and airports data
 -- Purpose: JOIN MapReduce results with airports data, aggregate by country/continent, output as JSON
 
--- Use Spark execution engine
-SET hive.execution.engine=spark;
+-- Use MapReduce execution engine (Tez has issues in this environment)
+SET hive.execution.engine=mr;
+SET hive.auto.convert.join=false;
 
 -- Drop existing tables for repeatability
 DROP TABLE IF EXISTS mapreduce_result;
-DROP TABLE IF EXISTS airports_table;
+DROP TABLE IF EXISTS airports_raw;
+DROP VIEW IF EXISTS airports_table;
 DROP TABLE IF EXISTS output_json;
 
 -- Create external table for MapReduce output (datasource3)
@@ -17,21 +19,35 @@ CREATE EXTERNAL TABLE mapreduce_result (
     avg_ticket_price DOUBLE
 ) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE LOCATION '${hiveconf:output_dir3}';
 
--- Create external table for airports data (datasource4)
--- Using OpenCSVSerde to handle commas within airport names
-CREATE EXTERNAL TABLE airports_table (
-    airport_id STRING,
-    airport_name STRING,
-    city STRING,
-    country STRING,
-    continent STRING,
-    type STRING
-) ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
-WITH SERDEPROPERTIES (
-   "separatorChar" = ","
-)
-STORED AS TEXTFILE LOCATION '${hiveconf:input_dir4}'
+-- Create raw table for airports data (datasource4)
+-- Loads each line as a single STRING for flexible parsing
+CREATE EXTERNAL TABLE airports_raw (
+    line STRING
+) STORED AS TEXTFILE LOCATION '${hiveconf:input_dir4}'
 TBLPROPERTIES ("skip.header.line.count" = "1");
+
+-- Create VIEW to intelligently parse airports CSV
+-- Handles both correct records (6 fields) and problematic records (7 fields)
+-- Problem: Some airport names contain commas (e.g., "Nitzsche, Heidenreich and Funk Airport")
+CREATE VIEW airports_table AS
+SELECT
+    cols[0] as airport_id,
+    -- If 7 fields, merge cols[1] and cols[2] as airport_name
+    -- If 6 fields, just use cols[1] as airport_name
+    CASE
+        WHEN size(cols) = 7 THEN concat(cols[1], ',', cols[2])
+        ELSE cols[1]
+    END as airport_name,
+    -- Last 4 fields are always in the same position from the end
+    cols[size(cols)-4] as city,
+    cols[size(cols)-3] as country,
+    cols[size(cols)-2] as continent,
+    cols[size(cols)-1] as type
+FROM (
+    SELECT split(line, ',') as cols
+    FROM airports_raw
+) parsed
+WHERE size(cols) IN (6, 7);
 
 -- Create output table with JSON SerDe
 CREATE EXTERNAL TABLE output_json (

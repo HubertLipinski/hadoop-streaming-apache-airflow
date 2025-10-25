@@ -61,7 +61,8 @@ echo "Starting Hive job..."
 
 # Run Hive job using beeline
 # NOTE: Using beeline instead of deprecated hive CLI
-beeline -u jdbc:hive2://localhost:10000/default \
+# IMPORTANT: -n flag with current user ensures proper authentication (required in BigData25)
+beeline -n "$(id -un)" -u jdbc:hive2://localhost:10000/default \
     --hiveconf output_dir3="$OUTPUT_DIR3" \
     --hiveconf input_dir4="$INPUT_DIR4" \
     --hiveconf output_dir6="$OUTPUT_DIR6" \

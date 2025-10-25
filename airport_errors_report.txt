@@ -1,0 +1,185 @@
+================================================================================
+RAPORT ANALIZA WADLIWYCH REKORDOW W PLIKU airports.csv
+================================================================================
+
+Plik zrodlowy: input/datasource4/airports.csv
+Data analizy: 2025-10-26
+
+STATYSTYKI:
+-----------
+Calkowita liczba linii:     101 (100 rekordow + 1 naglowek)
+Oczekiwana liczba pol:      6 (airport_id,airport_name,city,country,continent,type)
+Wadliwe rekordy:            37 z 100 (37%)
+Problem:                    Nazwy lotnisk zawierajace przecinki dzielą sie na dodatkowe pola
+
+================================================================================
+SZCZEGOLOWA LISTA WADLIWYCH REKORDOW (37 rekordow)
+================================================================================
+
+Linia 5: 7 pol
+Airport ID: CZRJ
+Tresc: CZRJ,Nitzsche, Heidenreich and Funk Airport,Port Ashley,Venezuela,Europe,Domestic
+
+Linia 6: 7 pol
+Airport ID: EETN
+Tresc: EETN,Greenfelder, Weissnat and Lueilwitz Airport,New Tomasaborough,Saint Kitts and Nevis,Asia,Regional
+
+Linia 12: 7 pol
+Airport ID: FZVI
+Tresc: FZVI,Lowe, Mayert and Murphy Airport,Lake Daria,Nicaragua,North America,Domestic
+
+Linia 13: 7 pol
+Airport ID: WRLR
+Tresc: WRLR,Satterfield, Mitchell and Gottlieb Airport,Trantowmouth,Latvia,Europe,International
+
+Linia 14: 7 pol
+Airport ID: ROKJ
+Tresc: ROKJ,Weissnat, Roberts and Harber Airport,Jerdeland,Isle of Man,South America,International
+
+Linia 16: 7 pol
+Airport ID: UUOB
+Tresc: UUOB,Gleichner, Hoeger and Tromp Airport,Lloydview,Trinidad and Tobago,Africa,International
+
+Linia 19: 7 pol
+Airport ID: ENRS
+Tresc: ENRS,Abbott, Morar and Donnelly Airport,Tonishashire,Estonia,Asia,Regional
+
+Linia 22: 7 pol
+Airport ID: LFMH
+Tresc: LFMH,Langosh, Tremblay and Morar Airport,Lynwoodborough,Gambia,Europe,Domestic
+
+Linia 24: 7 pol
+Airport ID: NWWW
+Tresc: NWWW,Witting, Okuneva and Bergstrom Airport,Browntown,Jersey,Asia,Domestic
+
+Linia 25: 7 pol
+Airport ID: LICR
+Tresc: LICR,McClure, Jones and Schumm Airport,Gaylordborough,Mozambique,Oceania,Regional
+
+Linia 28: 7 pol
+Airport ID: KMSN
+Tresc: KMSN,Hirthe, Yost and Mosciski Airport,Port Vi,Singapore,North America,International
+
+Linia 31: 7 pol
+Airport ID: MMZO
+Tresc: MMZO,Boyer, Dooley and Jones Airport,New Aldamouth,Monaco,Asia,Regional
+
+Linia 32: 7 pol
+Airport ID: MMTJ
+Tresc: MMTJ,Jakubowski, Botsford and Wehner Airport,East Nicolas,Holy See (Vatican City State),South America,International
+
+Linia 35: 7 pol
+Airport ID: USCC
+Tresc: USCC,O'Conner, Heidenreich and Jakubowski Airport,Zonaland,Chile,Asia,Domestic
+
+Linia 39: 7 pol
+Airport ID: YTIB
+Tresc: YTIB,Gottlieb, Cruickshank and Beier Airport,Lake Kimfort,Yemen,North America,Regional
+
+Linia 42: 7 pol
+Airport ID: YPAG
+Tresc: YPAG,Shields, Beer and Brown Airport,Dachchester,Bermuda,Asia,Regional
+
+Linia 44: 7 pol
+Airport ID: FMNM
+Tresc: FMNM,Ritchie, Daugherty and Herzog Airport,Breitenbergville,Madagascar,Africa,Regional
+
+Linia 45: 7 pol
+Airport ID: HAJM
+Tresc: HAJM,Mraz, Champlin and Erdman Airport,South Bridget,Somalia,North America,Regional
+
+Linia 50: 7 pol
+Airport ID: UHMD
+Tresc: UHMD,Kozey, Wintheiser and Treutel Airport,West Valda,Argentina,Asia,International
+
+Linia 53: 7 pol
+Airport ID: MWCB
+Tresc: MWCB,Pfeffer, O'Hara and Shields Airport,Port Louie,Jersey,Europe,International
+
+Linia 55: 7 pol
+Airport ID: MGQC
+Tresc: MGQC,Zemlak, Kirlin and Gaylord Airport,Uptonview,Kenya,Africa,Regional
+
+Linia 58: 7 pol
+Airport ID: FVFA
+Tresc: FVFA,Pfannerstill, Leannon and Kilback Airport,Port Ronaldborough,Tajikistan,South America,Regional
+
+Linia 62: 7 pol
+Airport ID: EDXB
+Tresc: EDXB,Batz, Roob and Nicolas Airport,Emardville,Equatorial Guinea,North America,Regional
+
+Linia 65: 7 pol
+Airport ID: MHTG
+Tresc: MHTG,Graham, White and Wilderman Airport,North Agripinaview,New Caledonia,Africa,Domestic
+
+Linia 66: 7 pol
+Airport ID: RJSC
+Tresc: RJSC,Roberts, Fadel and O'Kon Airport,Colinstad,Saint Kitts and Nevis,Asia,Regional
+
+Linia 67: 7 pol
+Airport ID: CYXH
+Tresc: CYXH,Bednar, Fahey and Stehr Airport,Bechtelarburgh,Syrian Arab Republic,South America,International
+
+Linia 68: 7 pol
+Airport ID: MMIO
+Tresc: MMIO,Shanahan, Schmeler and Hane Airport,East Jefferybury,Nigeria,Europe,Regional
+
+Linia 79: 7 pol
+Airport ID: EGJB
+Tresc: EGJB,Torp, Klocko and Jones Airport,South Karla,British Indian Ocean Territory (Chagos Archipelago),Oceania,Regional
+
+Linia 80: 7 pol
+Airport ID: KXNA
+Tresc: KXNA,Goldner, Hyatt and Cassin Airport,North Melissastad,Palau,South America,International
+
+Linia 84: 7 pol
+Airport ID: VGRJ
+Tresc: VGRJ,King, O'Keefe and Zieme Airport,South Eddie,Belgium,South America,International
+
+Linia 85: 7 pol
+Airport ID: VILD
+Tresc: VILD,Morar, Armstrong and DuBuque Airport,Iselaland,Cayman Islands,Oceania,Domestic
+
+Linia 87: 7 pol
+Airport ID: CYEV
+Tresc: CYEV,Grant, Pfeffer and Beatty Airport,South Jaymie,Finland,Europe,Domestic
+
+Linia 91: 7 pol
+Airport ID: SCTN
+Tresc: SCTN,Von, Graham and Wisoky Airport,Port Bartton,Costa Rica,Europe,Domestic
+
+Linia 93: 7 pol
+Airport ID: PGRO
+Tresc: PGRO,O'Kon, Johnston and Hahn Airport,Port Neliahaven,Saint Helena,North America,Domestic
+
+Linia 97: 7 pol
+Airport ID: FARS
+Tresc: FARS,Corwin, Bergnaum and Breitenberg Airport,New Rolfton,Maldives,Oceania,Domestic
+
+Linia 100: 7 pol
+Airport ID: VTCR
+Tresc: VTCR,Muller, Glover and Ortiz Airport,Goodwinshire,Niue,Europe,International
+
+Linia 101: 7 pol
+Airport ID: YBKE
+Tresc: YBKE,Marvin, Waelchi and McDermott Airport,South Vincenzo,Isle of Man,Asia,Regional
+
+================================================================================
+PODSUMOWANIE
+================================================================================
+
+Numery linii z bledami (37 linii):
+5, 6, 12, 13, 14, 16, 19, 22, 24, 25, 28, 31, 32, 35, 39, 42, 44, 45, 50, 53,
+55, 58, 62, 65, 66, 67, 68, 79, 80, 84, 85, 87, 91, 93, 97, 100, 101
+
+WZORZEC PROBLEMU:
+Wszystkie wadliwe rekordy maja nazwy lotnisk w formacie:
+  "Nazwisko1, Nazwisko2 and Nazwisko3 Airport"
+
+Przecinek po pierwszym nazwisku powoduje podzial na dodatkowe pole podczas
+parsowania CSV. Rozwiazanie: dodac cudzyslow wokol nazw lub polaczyc nadmiarowe
+pola w kolumne airport_name.
+
+================================================================================
+KONIEC RAPORTU
+================================================================================
