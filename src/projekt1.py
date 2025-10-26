@@ -18,7 +18,7 @@ with DAG(
         "output_mr_dir": Param("/project1/output_mr3", type="string"),
         "output_dir": Param("/project1/output6", type="string"),
         "classic_or_streaming": Param(
-            "streaming", enum=["classic", "streaming"]
+            "streaming", enum=["streaming"]
         ),
     },
     render_template_as_native_obj=True,
