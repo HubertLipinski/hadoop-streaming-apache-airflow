@@ -1,0 +1,135 @@
+ INFO  : Compiling command(queryId=hadoop_20251026103559_3fe6b837-ed8c-453f-ad62-6c4382c22477): INSERT OVERWRITE TABLE output_json
+SELECT continent,
+country,
+total_flights,
+avg_ticket_price,
+RANK() OVER (
+PARTITION BY continent
+ORDER BY total_flights DESC
+) as rank_in_continent
+FROM (
+SELECT a.continent,
+a.country,
+SUM(mr.flight_count) as total_flights,
+SUM(mr.avg_ticket_price * mr.flight_count) / SUM(mr.flight_count) as avg_ticket_price
+FROM mapreduce_result mr
+INNER JOIN airports_table a ON mr.departure_airport_id = a.airport_id
+GROUP BY a.continent,
+a.country
+) country_stats
+INFO  : No Stats for default@mapreduce_result, Columns: avg_ticket_price, flight_count, departure_airport_id
+INFO  : No Stats for default@airports_raw, Columns: line
+INFO  : Semantic Analysis Completed (retrial = false)
+INFO  : Created Hive schema: Schema(fieldSchemas:[FieldSchema(name:continent, type:string, comment:null), FieldSchema(name:country, type:string, comment:null), FieldSchema(name:total_flights, type:bigint, comment:null), FieldSchema(name:avg_ticket_price, type:double, comment:null), FieldSchema(name:rank_in_continent, type:int, comment:null)], properties:null)
+INFO  : Completed compiling command(queryId=hadoop_20251026103559_3fe6b837-ed8c-453f-ad62-6c4382c22477); Time taken: 0.687 seconds
+INFO  : Executing command(queryId=hadoop_20251026103559_3fe6b837-ed8c-453f-ad62-6c4382c22477): INSERT OVERWRITE TABLE output_json
+SELECT continent,
+country,
+total_flights,
+avg_ticket_price,
+RANK() OVER (
+PARTITION BY continent
+ORDER BY total_flights DESC
+) as rank_in_continent
+FROM (
+SELECT a.continent,
+a.country,
+SUM(mr.flight_count) as total_flights,
+SUM(mr.avg_ticket_price * mr.flight_count) / SUM(mr.flight_count) as avg_ticket_price
+FROM mapreduce_result mr
+INNER JOIN airports_table a ON mr.departure_airport_id = a.airport_id
+GROUP BY a.continent,
+a.country
+) country_stats
+INFO  : Query ID = hadoop_20251026103559_3fe6b837-ed8c-453f-ad62-6c4382c22477
+INFO  : Total jobs = 1
+INFO  : Launching Job 1 out of 1
+INFO  : Starting task [Stage-1:MAPRED] in serial mode
+INFO  : Subscribed to counters: [] for queryId: hadoop_20251026103559_3fe6b837-ed8c-453f-ad62-6c4382c22477
+INFO  : Tez session hasn't been created yet. Opening session
+ERROR : Failed to execute tez graph.
+org.apache.tez.dag.api.SessionNotRunning: TezSession has already shutdown. Application application_1761470102284_0009 failed 2 times due to AM Container for appattempt_1761470102284_0009_000002 exited with  exitCode: 1
+Failing this attempt.Diagnostics: [2025-10-26 10:36:03.880]Exception from container-launch.
+Container id: container_1761470102284_0009_02_000001
+Exit code: 1
+
+[2025-10-26 10:36:03.883]Container exited with a non-zero exit code 1. Error file: prelaunch.err.
+Last 4096 bytes of prelaunch.err :
+Last 4096 bytes of stderr :
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/tmp/hadoop-hadoop/nm-local-dir/filecache/29/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Reload4jLoggerFactory]
+
+
+[2025-10-26 10:36:03.883]Container exited with a non-zero exit code 1. Error file: prelaunch.err.
+Last 4096 bytes of prelaunch.err :
+Last 4096 bytes of stderr :
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/tmp/hadoop-hadoop/nm-local-dir/filecache/29/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Reload4jLoggerFactory]
+
+
+For more detailed output, check the application tracking page: http://master:8088/cluster/app/application_1761470102284_0009 Then click on links to logs of each attempt.
+. Failing the application.
+	at org.apache.tez.client.TezClient.waitTillReady(TezClient.java:995) ~[tez-api-0.10.5.jar:0.10.5]
+	at org.apache.tez.client.TezClient.waitTillReady(TezClient.java:964) ~[tez-api-0.10.5.jar:0.10.5]
+	at org.apache.hadoop.hive.ql.exec.tez.TezSessionState.startSessionAndContainers(TezSessionState.java:484) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hadoop.hive.ql.exec.tez.TezSessionState.openInternal(TezSessionState.java:384) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hadoop.hive.ql.exec.tez.TezSessionPoolSession.openInternal(TezSessionPoolSession.java:124) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hadoop.hive.ql.exec.tez.TezSessionState.open(TezSessionState.java:250) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hadoop.hive.ql.exec.tez.TezTask.ensureSessionHasResources(TezTask.java:481) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hadoop.hive.ql.exec.tez.TezTask.execute(TezTask.java:232) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hadoop.hive.ql.exec.Task.executeTask(Task.java:214) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hadoop.hive.ql.exec.TaskRunner.runSequential(TaskRunner.java:105) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hadoop.hive.ql.Executor.launchTask(Executor.java:354) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hadoop.hive.ql.Executor.launchTasks(Executor.java:327) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hadoop.hive.ql.Executor.runTasks(Executor.java:244) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hadoop.hive.ql.Executor.execute(Executor.java:105) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hadoop.hive.ql.Driver.execute(Driver.java:345) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hadoop.hive.ql.Driver.runInternal(Driver.java:189) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hadoop.hive.ql.Driver.run(Driver.java:142) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hadoop.hive.ql.Driver.run(Driver.java:137) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hadoop.hive.ql.reexec.ReExecDriver.run(ReExecDriver.java:190) ~[hive-exec-4.1.0.jar:4.1.0]
+	at org.apache.hive.service.cli.operation.SQLOperation.runQuery(SQLOperation.java:234) ~[hive-service-4.1.0.jar:4.1.0]
+	at org.apache.hive.service.cli.operation.SQLOperation$BackgroundWork$1.run(SQLOperation.java:334) ~[hive-service-4.1.0.jar:4.1.0]
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:712) ~[?:?]
+	at java.base/javax.security.auth.Subject.doAs(Subject.java:439) ~[?:?]
+	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1953) ~[hadoop-common-3.4.2.jar:?]
+	at org.apache.hive.service.cli.operation.SQLOperation$BackgroundWork.run(SQLOperation.java:354) ~[hive-service-4.1.0.jar:4.1.0]
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539) ~[?:?]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264) ~[?:?]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[?:?]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[?:?]
+	at java.base/java.lang.Thread.run(Thread.java:840) [?:?]
+ERROR : FAILED: Execution Error, return code 1 from org.apache.hadoop.hive.ql.exec.tez.TezTask. TezSession has already shutdown. Application application_1761470102284_0009 failed 2 times due to AM Container for appattempt_1761470102284_0009_000002 exited with  exitCode: 1
+Failing this attempt.Diagnostics: [2025-10-26 10:36:03.880]Exception from container-launch.
+Container id: container_1761470102284_0009_02_000001
+Exit code: 1
+
+[2025-10-26 10:36:03.883]Container exited with a non-zero exit code 1. Error file: prelaunch.err.
+Last 4096 bytes of prelaunch.err :
+Last 4096 bytes of stderr :
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/tmp/hadoop-hadoop/nm-local-dir/filecache/29/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Reload4jLoggerFactory]
+
+
+[2025-10-26 10:36:03.883]Container exited with a non-zero exit code 1. Error file: prelaunch.err.
+Last 4096 bytes of prelaunch.err :
+Last 4096 bytes of stderr :
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/tmp/hadoop-hadoop/nm-local-dir/filecache/29/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/opt/hadoop/share/hadoop/common/lib/slf4j-reload4j-1.7.36.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Reload4jLoggerFactory]
+
+
+For more detailed output, check the application tracking page: http://master:8088/cluster/app/application_1761470102284_0009 Then click on links to logs of each attempt.
+. Failing the application.
+INFO  : Completed executing command(queryId=hadoop_20251026103559_3fe6b837-ed8c-453f-ad62-6c4382c22477); Time taken: 3.326 seconds

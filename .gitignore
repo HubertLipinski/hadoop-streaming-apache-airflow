@@ -93,3 +93,4 @@ output6.json
 src/test_mr_output.csv
 src/output*.json
 weryfikacja_kryteriow.md
+.claude

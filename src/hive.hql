@@ -1,9 +1,14 @@
 -- Hive script for processing MapReduce output and airports data
 -- Purpose: JOIN MapReduce results with airports data, aggregate by country/continent, output as JSON
 
--- Use MapReduce execution engine (Tez has issues in this environment)
-SET hive.execution.engine=mr;
-SET hive.auto.convert.join=false;
+-- Use Tez execution engine for better performance
+-- SET hive.execution.engine=tez;
+-- SET hive.auto.convert.join=true;
+
+-- Tez memory configuration to prevent AM container failures
+-- SET tez.am.resource.memory.mb=1024;
+-- SET hive.tez.container.size=1024;
+-- SET hive.tez.java.opts=-Xmx819m;
 
 -- Drop existing tables for repeatability
 DROP TABLE IF EXISTS mapreduce_result;
