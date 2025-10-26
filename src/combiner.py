@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-MapReduce Combiner for flights data processing.
+Combiner do przetwarzania danych lotów.
 
-Performs local aggregation of mapper output to reduce network traffic.
-For average calculation, aggregates price sums and counts locally.
+Wykonuje lokalną agregację wyników z mapper w celu redukcji ruchu sieciowego.
+Do obliczania średniej agreguje sumy cen i liczniki lokalnie.
 
-Input/Output format:
-- Key: departure_airport_id_status  
+Format wejścia/wyjścia:
+- Key: departure_airport_id_status
 - Value: price_sum,count
 """
 
@@ -26,22 +26,22 @@ def main():
                 
             try:
                 if '\t' not in line:
-                    print(f"No tab separator in line {line_num}: {line}", file=sys.stderr)
+                    print(f"Brak separatora tab w linii {line_num}: {line}", file=sys.stderr)
                     continue
-                    
+
                 key, value = line.split('\t', 1)
-                
+
                 if ',' not in value:
-                    print(f"Invalid value format in line {line_num}: {value}", file=sys.stderr)
+                    print(f"Nieprawidłowy format wartości w linii {line_num}: {value}", file=sys.stderr)
                     continue
-                    
+
                 price_str, count_str = value.split(',', 1)
-                
+
                 try:
                     price = float(price_str)
                     count = int(count_str)
                 except ValueError as e:
-                    print(f"Invalid number format in line {line_num}: {e}", file=sys.stderr)
+                    print(f"Nieprawidłowy format liczby w linii {line_num}: {e}", file=sys.stderr)
                     continue
                 
                 if current_key != key:
@@ -56,22 +56,22 @@ def main():
                     total_flight_count += count
                     
             except Exception as e:
-                print(f"Exception processing line {line_num}: {str(e)}", file=sys.stderr)
+                print(f"Wyjątek podczas przetwarzania linii {line_num}: {str(e)}", file=sys.stderr)
                 continue
-        
+
         if current_key is not None:
             output_partial_aggregation(current_key, total_price_sum, total_flight_count)
-            
+
     except Exception as e:
-        print(f"Fatal exception in combiner: {str(e)}", file=sys.stderr)
+        print(f"Krytyczny wyjątek w combiner: {str(e)}", file=sys.stderr)
         sys.exit(1)
 
 def output_partial_aggregation(key, total_price_sum, total_flight_count):
-    """Output partial aggregation in the same format as mapper output."""
+    """Wypisuje częściową agregację w tym samym formacie co output z mapper."""
     try:
         print(f"{key}\t{total_price_sum},{total_flight_count}")
     except Exception as e:
-        print(f"Exception in output_partial_aggregation for key {key}: {str(e)}", file=sys.stderr)
+        print(f"Wyjątek w output_partial_aggregation dla klucza {key}: {str(e)}", file=sys.stderr)
 
 if __name__ == "__main__":
     main()

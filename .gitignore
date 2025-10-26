@@ -63,10 +63,8 @@ _SUCCESS
 *.out
 
 # Large data files
-*.zip
 *.tar.gz
 *.gz
-zestaw*.zip
 
 # PDFs (keep only essential docs)
 *.pdf

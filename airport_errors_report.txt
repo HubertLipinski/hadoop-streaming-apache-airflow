@@ -3,7 +3,6 @@ RAPORT ANALIZA WADLIWYCH REKORDOW W PLIKU airports.csv
 ================================================================================
 
 Plik zrodlowy: input/datasource4/airports.csv
-Data analizy: 2025-10-26
 
 STATYSTYKI:
 -----------
@@ -165,21 +164,7 @@ Airport ID: YBKE
 Tresc: YBKE,Marvin, Waelchi and McDermott Airport,South Vincenzo,Isle of Man,Asia,Regional
 
 ================================================================================
-PODSUMOWANIE
-================================================================================
 
 Numery linii z bledami (37 linii):
 5, 6, 12, 13, 14, 16, 19, 22, 24, 25, 28, 31, 32, 35, 39, 42, 44, 45, 50, 53,
 55, 58, 62, 65, 66, 67, 68, 79, 80, 84, 85, 87, 91, 93, 97, 100, 101
-
-WZORZEC PROBLEMU:
-Wszystkie wadliwe rekordy maja nazwy lotnisk w formacie:
-  "Nazwisko1, Nazwisko2 and Nazwisko3 Airport"
-
-Przecinek po pierwszym nazwisku powoduje podzial na dodatkowe pole podczas
-parsowania CSV. Rozwiazanie: dodac cudzyslow wokol nazw lub polaczyc nadmiarowe
-pola w kolumne airport_name.
-
-================================================================================
-KONIEC RAPORTU
-================================================================================
